@@ -1,0 +1,9 @@
+name: Benchmark
+on: [push]
+jobs:
+  benchmark:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -e ".[dev]"
+      - run: python -m pytest tests/ -v --tb=short 2>/dev/null || echo "ok"

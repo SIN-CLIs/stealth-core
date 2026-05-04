@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    volumes:
+      - ~/.local/share/opencode:/opencode
+    network_mode: host
