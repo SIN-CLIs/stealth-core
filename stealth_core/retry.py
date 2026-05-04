@@ -1,27 +1,20 @@
-"""Retry-Decorator mit exponentiellem Backoff."""
-import time
-from functools import wraps
+import time, logging
+from .exceptions import MaxRetriesExceededError
+logger = logging.getLogger(__name__)
 
-class MaxRetriesExceededError(Exception):
-    def __init__(self, func_name, attempts, last_error):
-        self.func_name = func_name
-        self.attempts = attempts
-        self.last_error = last_error
-        super().__init__(f"{func_name} failed after {attempts} attempts: {last_error}")
-
-def retry(max_attempts=3, backoff=0.5, exponential=True, retry_on=(Exception,)):
+def retry(max_attempts=3, backoff_factor=0.5, exponential=True, retry_on=(Exception,)):
     def decorator(func):
-        @wraps(func)
         def wrapper(*args, **kwargs):
-            last_e = None
-            for attempt in range(max_attempts):
+            last_exc = None
+            for attempt in range(1, max_attempts + 1):
                 try:
                     return func(*args, **kwargs)
                 except retry_on as e:
-                    last_e = e
-                    if attempt < max_attempts - 1:
-                        wait = backoff * (2 ** (attempt + 1) if exponential else 1)
-                        time.sleep(wait)
-            raise MaxRetriesExceededError(func.__name__, max_attempts, last_e)
+                    last_exc = e
+                    if attempt == max_attempts:
+                        raise MaxRetriesExceededError(f"{func.__name__} failed after {max_attempts}: {e}") from e
+                    wait = backoff_factor * (2 ** (attempt - 1) if exponential else 1)
+                    logger.warning("Retry %d/%d %s: %s. Wait %.1fs", attempt, max_attempts, func.__name__, e, wait)
+                    time.sleep(wait)
         return wrapper
     return decorator
