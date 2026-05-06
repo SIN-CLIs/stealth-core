@@ -18,11 +18,13 @@
 | Command | Grund |
 |---------|-------|
 | webauto-nodriver | ABSOLUT BANNED |
-| skylight-cli | DEPRECATED |
+| skylight-cli | RE-ACTIVATED (snapshot-compact + batch) |
 | CDP Navigation | BANNED |
 | pyautogui / pynput | BANNED |
 
 ---
 
 **→ Zugehörige Commands**: [banned.md](banned.md) | [sinrules.md](sinrules.md)
-**Letztes Update**: 2026-05-05
+**Letztes Update**: 2026-05-06
+
+> **See SIN-CLIs/stealth-runner/learn.md for authoritative documentation (NEMO is PRIMARY as of 2026-05-06).**

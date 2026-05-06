@@ -10,8 +10,8 @@
 
 Dieses Repo (stealth-core) ist Teil der **SIN-CLIs Stealth Suite** und MUSS:
 1. Alle Regeln aus [stealth-runner/sinrules.md](https://github.com/OpenSIN-AI/stealth-runner/blob/main/sinrules.md) befolgen
-2. BANNED Tools vermeiden: webauto-nodriver (absolut), skylight-cli (deprecated), CDP (nur JS)
-3. CUA-ONLY Architektur für Browser-Interaktion respektieren
+2. BANNED Tools vermeiden: webauto-nodriver (absolut). skylight-cli ist RE-ACTIVATED für snapshot-compact + batch (NEMO). CDP (nur JS).
+3. NEMO Architektur (CUA-ONLY ist LEGACY/DEPRECATED) für Browser-Interaktion respektieren
 4. Pipeline: perceive → plan → guard → execute → critique
 
 ## §2 — Repo-spezifische Verbote
@@ -26,4 +26,6 @@ Dieses Repo (stealth-core) ist Teil der **SIN-CLIs Stealth Suite** und MUSS:
 Alle 14 Pflichtdateien MÜSSEN existieren und aktuell sein.
 Check mit: `python3 /Users/jeremy/dev/stealth-runner/scripts/check_doc_health.py --repo stealth-core`
 
-**Letztes Update**: 2026-05-05
+**Letztes Update**: 2026-05-06
+
+> **See SIN-CLIs/stealth-runner/learn.md for authoritative documentation (NEMO is PRIMARY as of 2026-05-06).**
